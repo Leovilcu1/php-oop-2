@@ -7,44 +7,71 @@
 
   $categoriaGatti = new Categoria("Gatti","https://images.unsplash.com/photo-1533738363-b7f9aef128ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80");
   $categoriaCani = new Categoria("Cani","https://images.unsplash.com/photo-1591769225440-811ad7d6eab3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80");
-
-
-  $prodotti=[];
-  $prodotti[] = new ProdottoBase(
-    "GOURMET Gold",
-    "Alimento umido completo Gourmet Gold in tante deliziose ricette, con componenti di alta qualità per deliziare il palato raffinato del vostro gatto. Ora in conveniente multipack misto da 48 x 85 g",
-    "24.99",
-    "https://shop-cdn-m.mediazs.com/bilder/gourmet/gold/pacco/misto/x/g/5/800/50340_pla_purina_gourmet_feine_pastete_huhn_85g_5.jpg",
-    78,
-    $categoriaGatti
-  );
-  $prodotti[] = new ProdottoBase(
-    "Wolf Of WILDERNESS",
-    "Alimento umido completo ricco di proteine di qualità Premium senza cereali per cani adulti, ispirato all'alimentazione originaria del lupo, con tanta carne (monoproteico), frutti di bosco, radici ed erbe selvatiche",
-    "14.99",
-    "https://shop-cdn-m.mediazs.com/bilder/wolf/of/wilderness/adult/x/g/7/800/wow_classic_stronglands_400g_1000px_7.jpg",
-    78,
-    $categoriaCani
-  );
-  $prodotti[] = new Cibo(
-    "Yarrah bio",
+  
+  $nome = $_GET["nome"];
+  try {
+    $prodotti[] = new Cibo(   
+    $nome,
     "2 kg o 2,4 kg di crocchette di qualità biologica controllata Yarrah Bio per gatti, con materie prime naturali e prive di additivi artificiali",
     22.09,
     "https://shop-cdn-m.mediazs.com/bilder/prezzo/speciale/yarrah/bio/crocchette/per/gatti/0/800/159396_pla_bio_yarrah_cat_food_huhn_10kg_hs_01_0.jpg",
     52,
     $categoriaGatti,
     "22/03/2026",
-    "11/03/2021"
+    "11/03/2021",
+    "22cm",
+    );
+  }
+  catch (Exception $e){
+    echo "<h1> Errore: indirizzo non valido </h1>" ;
+    var_dump($e->getMessage());
+    die();
+  }
+
+ 
+  $prodotti=[];
+  $prodotti[] = new ProdottoBase(
+
+    "GOURMET Gold",
+    "Alimento umido completo Gourmet Gold in tante deliziose ricette, con componenti di alta qualità per deliziare il palato raffinato del vostro gatto. Ora in conveniente multipack misto da 48 x 85 g",
+    "24.99",
+    "https://shop-cdn-m.mediazs.com/bilder/gourmet/gold/pacco/misto/x/g/5/800/50340_pla_purina_gourmet_feine_pastete_huhn_85g_5.jpg",
+    78,
+    $categoriaGatti,
+    "1metro"
+  );
+  $prodotti[] = new ProdottoBase(
+    
+    "Wolf Of WILDERNESS",
+    "Alimento umido completo ricco di proteine di qualità Premium senza cereali per cani adulti, ispirato all'alimentazione originaria del lupo, con tanta carne (monoproteico), frutti di bosco, radici ed erbe selvatiche",
+    30.99,
+    "https://shop-cdn-m.mediazs.com/bilder/wolf/of/wilderness/adult/x/g/7/800/wow_classic_stronglands_400g_1000px_7.jpg",
+    78,
+    $categoriaCani,
+    "22 Metri"
+  );
+  $prodotti[] = new Cibo(
+    $nome,
+    "2 kg o 2,4 kg di crocchette di qualità biologica controllata Yarrah Bio per gatti, con materie prime naturali e prive di additivi artificiali",
+    22.09,
+    "https://shop-cdn-m.mediazs.com/bilder/prezzo/speciale/yarrah/bio/crocchette/per/gatti/0/800/159396_pla_bio_yarrah_cat_food_huhn_10kg_hs_01_0.jpg",
+    52,
+    $categoriaGatti,
+    "22/03/2026",
+    "11/03/2021",
+    "22cm"
   );
 
   $prodotti[] = new Cuccia(
     "Cuccia per cani Jackson",
     "Cuccia in legno di abete per cani, resistente alle intemperie, con tetto spiovente apribile, vano contenitore per riporre alimenti e accessori e area pappa rialzata con 2 ciotole, facile da montare.",
-    146.99,
+    11.99,
     "https://shop-cdn-m.mediazs.com/bilder/cuccia/per/cani/jackson/6/800/167896_jackson_outside_res90_fg_4159_6.jpg",
     6,
     $categoriaCani,
     2,
+    "33cm",
+    "red"
   );
 
   $prodotti[] = new Gioco(
@@ -54,12 +81,11 @@
     "https://shop-cdn-m.mediazs.com/bilder/bastone/da/masticare/chewies/in/legno/di/caff/4/800/73572_pla_chewies_kaffeeholzkaustab_m2_4.jpg",
     3,
     $categoriaCani,
-    "Legno di caffè"
-  )
-
-
-
-
+    "Legno di caffè",
+    "14cm;", 
+    "black"
+  );
+// throw new Exception("questo non e un numero");
 ?>
 
 <!DOCTYPE html>
@@ -89,8 +115,8 @@
         <div class="col">
         <div class="card h-100">
           <img src="<?php echo $prodotto->immagine?>" class="card-img-top" alt="<?php echo $prodotto->nome?>">
-          <div class="card-body">
-            <h5 class="card-title"><?php echo $prodotto->nome?></h5>
+          <div class="card-body bg-warning">
+            <h5 class="card-title "><?php echo $prodotto->nome?></h5>
             <div class="d-flex align-items-center">
               <img src="<?php echo $prodotto->categoria->icona?>" class="w-25" alt="">
             <h4 class="card-text mx-3"><?php echo $prodotto->categoria->nome?></h4>
@@ -109,6 +135,7 @@
             if(is_a($prodotto, "Cuccia")){
             ?>
               <p class="card-text" >Posti : <?php echo $prodotto->posti?></p>
+              <p class="card-text" >Colore : <?php echo $prodotto->colore?></p>
             <?php
             }?>
 
@@ -116,9 +143,12 @@
             if(is_a($prodotto ,"Gioco")){
             ?>
               <p class="card-text">materiale : <?php echo $prodotto->materiale?></p>
+              <p class="card-text">colore : <?php echo $prodotto->colore?></p>
             <?php
             }?>
-            <button>Vedi Detagli</button>
+              <p class="card-text">Dimensione : <?php echo $prodotto->dimensione?></p>
+
+            <button><a href="">Vedi Prodotto</a></button>
           </div>
         </div>
       </div>

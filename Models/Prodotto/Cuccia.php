@@ -1,9 +1,14 @@
 <?php 
 
 // require_once __DIR__."ProdottoBase.php";
+require_once __DIR__."/../../traits/haColore.php";
+
 
 class Cuccia extends ProdottoBase{
+
     public $posti;
+    use Colore;
+
 
     function __construct(
         string $_nome,
@@ -12,7 +17,9 @@ class Cuccia extends ProdottoBase{
         string $_immagine,
         int $_quantita,
         Categoria $_categoria,
-        int $posti
+        int $_posti,
+        string $_dimensione,
+        string $_colore,
         )
     {
         parent::__construct(
@@ -21,9 +28,11 @@ class Cuccia extends ProdottoBase{
             $_prezzo,
             $_immagine,
             $_quantita,
-            $_categoria
+            $_categoria,
+            $_dimensione,
         );
-        $this->posti = $posti;
+        $this->posti = $_posti;
+        $this ->colore = $_colore;
     }
 }
 

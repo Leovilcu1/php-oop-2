@@ -15,6 +15,7 @@ class Cibo extends ProdottoBase{
         Categoria $_categoria,
         string $_scadenza,
         string $_dataProduzione,
+        string $_dimensione,
         )
     {
         parent::__construct(
@@ -23,7 +24,8 @@ class Cibo extends ProdottoBase{
             $_prezzo,
             $_immagine,
             $_quantita,
-            $_categoria
+            $_categoria,
+            $_dimensione,
         );
         $this->scadenza = $_scadenza;
         $this->dataProduzione = $_dataProduzione;
